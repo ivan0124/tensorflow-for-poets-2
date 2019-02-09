@@ -20,8 +20,9 @@ ORIGINAL_TF_MODEL="/tmp/imagenet/mobilenet_v1_1.0_224_frozen.tgz"
 if [ -f "$ORIGINAL_TF_MODEL" ]; then
     echo "Original TensorFlow Model Found ==> /tmp/imagenet/mobilenet_v1_1.0_224_frozen.tgz exist"
 else
+    mkdir -p /tmp/imagenet
     cp ./mobilenet_v1_1.0_224_frozen.tgz /tmp/imagenet
-    tar xvzf /tmp/imagenet/mobilenet_v1_1.0_224_frozen.tgz
+    tar xvzf /tmp/imagenet/mobilenet_v1_1.0_224_frozen.tgz /tmp/imagenet/
 fi
 
 #Retrain model
