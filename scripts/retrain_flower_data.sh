@@ -15,6 +15,15 @@ rm -rf ${GRAPH_DEF_FILE}
 rm -rf ${OUT_LABLE_RETRAIN}
 rm -rf ${OUT_TFLITE_FILE}
 
+#Copy original model to /tmp/imagenet
+ORIGINAL_TF_MODEL="/tmp/imagenet/mobilenet_v1_1.0_224_frozen.tgz"
+if [ -f "$ORIGINAL_TF_MODEL" ]; then
+    echo "Original TensorFlow Model Found ==> /tmp/imagenet/mobilenet_v1_1.0_224_frozen.tgz exist"
+else
+    cp ./mobilenet_v1_1.0_224_frozen.tgz /tmp/imagenet
+    tar xvzf /tmp/imagenet/mobilenet_v1_1.0_224_frozen.tgz
+fi
+
 #Retrain model
 python retrain.py --image_dir ${RETRAIN_DATA} --output_graph=${GRAPH_DEF_FILE} --output_labels=${OUT_LABLE_RETRAIN} --architecture=${RETRAIN_MODEL} --bottleneck_dir=${BOTTLENECK_FOLDER}
 
